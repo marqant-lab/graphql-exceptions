@@ -27,8 +27,9 @@ class ClientSaveAuthenticationGraphQLException extends Exception implements Clie
      */
     public function __construct(Throwable $Exception)
     {
+        $code = (int) $Exception->getCode();
         // pass general error message, code and previous exception to Exception constructor.
-        parent::__construct(trans('graphql-exceptions::errors.authentication'), $Exception->getCode(), $Exception);
+        parent::__construct(trans('graphql-exceptions::errors.authentication'), $code, $Exception);
 
         // save the real error message as reason
         $this->reason = $Exception->getMessage();

@@ -27,8 +27,9 @@ class ClientSaveModelNotFoundGraphQLException extends Exception implements Clien
      */
     public function __construct(Throwable $Exception)
     {
+        $code = (int) $Exception->getCode();
         // pass general error message, code and previous exception to Exception constructor.
-        parent::__construct(trans('graphql-exceptions::errors.model_not_found'), $Exception->getCode(), $Exception);
+        parent::__construct(trans('graphql-exceptions::errors.model_not_found'), $code, $Exception);
 
         // save the real error message as reason
         $this->reason = $Exception->getMessage();

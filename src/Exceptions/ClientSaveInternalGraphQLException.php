@@ -27,8 +27,9 @@ class ClientSaveInternalGraphQLException extends Exception implements ClientAwar
      */
     public function __construct(Throwable $Exception)
     {
+        $code = (int) $Exception->getCode();
         // pass general error message, code and previous exception to Exception constructor.
-        parent::__construct(trans('graphql-exceptions::errors.internal'), $Exception->getCode(), $Exception);
+        parent::__construct(trans('graphql-exceptions::errors.internal'), $code, $Exception);
 
         // save the real error message as reason
         $this->reason = $Exception->getMessage();

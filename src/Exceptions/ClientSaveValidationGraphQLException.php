@@ -26,8 +26,9 @@ class ClientSaveValidationGraphQLException extends Exception implements ClientAw
      */
     public function __construct(ValidationException $Exception)
     {
+        $code = (int) $Exception->getCode();
         // pass general error message, code and previous exception to Exception constructor.
-        parent::__construct(trans('graphql-exceptions::errors.validation'), $Exception->getCode(), $Exception);
+        parent::__construct(trans('graphql-exceptions::errors.validation'), $code, $Exception);
 
         // save the real error message as reason
         $this->reason = $Exception->getMessage();

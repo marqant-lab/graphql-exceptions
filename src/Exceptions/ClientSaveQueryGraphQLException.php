@@ -32,7 +32,7 @@ class ClientSaveQueryGraphQLException extends Exception implements ClientAware, 
     /**
      * Constructor of this exception.
      *
-     * @param  Illuminate\Database\QueryException $Exception
+     * @param  QueryException $Exception
      * @return void
      */
     public function __construct(QueryException $Exception)

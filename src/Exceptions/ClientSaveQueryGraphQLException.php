@@ -3,10 +3,16 @@
 namespace Tjventurini\GraphQLExceptions\Exceptions;
 
 use Exception;
+use GraphQL\Error\ClientAware;
+use GraphQL\Error\ProvidesExtensions;
 use Illuminate\Database\QueryException;
-use Nuwave\Lighthouse\Exceptions\RendersErrorsExtensions;
 
-class ClientSaveQueryGraphQLException extends Exception implements RendersErrorsExtensions
+/**
+ * Class ClientSaveQueryGraphQLException
+ *
+ * @package Tjventurini\GraphQLExceptions\Exceptions
+ */
+class ClientSaveQueryGraphQLException extends Exception implements ClientAware, ProvidesExtensions
 {
     /**
     * @var string
@@ -74,7 +80,7 @@ class ClientSaveQueryGraphQLException extends Exception implements RendersErrors
      *
      * @return array
      */
-    public function extensionsContent(): array
+    public function getExtensions(): array
     {
         return [
             'reason'  => $this->reason,

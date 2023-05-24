@@ -3,11 +3,17 @@
 namespace Tjventurini\GraphQLExceptions\Exceptions;
 
 use Exception;
+use GraphQL\Error\ClientAware;
+use GraphQL\Error\ProvidesExtensions;
 use Illuminate\Database\MultipleRecordsFoundException;
-use Nuwave\Lighthouse\Exceptions\RendersErrorsExtensions;
 use Illuminate\Contracts\Container\BindingResolutionException;
 
-class ClientSaveMultipleRecordsFoundExceptionGraphQLException extends Exception implements RendersErrorsExtensions
+/**
+ * Class ClientSaveMultipleRecordsFoundExceptionGraphQLException
+ *
+ * @package Tjventurini\GraphQLExceptions\Exceptions
+ */
+class ClientSaveMultipleRecordsFoundExceptionGraphQLException extends Exception implements ClientAware, ProvidesExtensions
 {
     /**
     * @var @string
@@ -60,7 +66,7 @@ class ClientSaveMultipleRecordsFoundExceptionGraphQLException extends Exception 
      *
      * @return array
      */
-    public function extensionsContent(): array
+    public function getExtensions(): array
     {
         return [
             'reason' => $this->reason,

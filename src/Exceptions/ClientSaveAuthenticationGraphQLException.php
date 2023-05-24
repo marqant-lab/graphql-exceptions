@@ -4,9 +4,15 @@ namespace Tjventurini\GraphQLExceptions\Exceptions;
 
 use Exception;
 use Throwable;
-use Nuwave\Lighthouse\Exceptions\RendersErrorsExtensions;
+use GraphQL\Error\ClientAware;
+use GraphQL\Error\ProvidesExtensions;
 
-class ClientSaveAuthenticationGraphQLException extends Exception implements RendersErrorsExtensions
+/**
+ * Class ClientSaveAuthenticationGraphQLException
+ *
+ * @package Tjventurini\GraphQLExceptions\Exceptions
+ */
+class ClientSaveAuthenticationGraphQLException extends Exception implements ClientAware, ProvidesExtensions
 {
     /**
     * @var @string
@@ -16,7 +22,7 @@ class ClientSaveAuthenticationGraphQLException extends Exception implements Rend
     /**
      * Constructor of this exception.
      *
-     * @param  Tjventurini\GraphQLExceptions\Exceptions\Throwable $Exception
+     * @param  Throwable $Exception
      * @return void
      */
     public function __construct(Throwable $Exception)
@@ -58,7 +64,7 @@ class ClientSaveAuthenticationGraphQLException extends Exception implements Rend
      *
      * @return array
      */
-    public function extensionsContent(): array
+    public function getExtensions(): array
     {
         return [
             'reason' => $this->reason,

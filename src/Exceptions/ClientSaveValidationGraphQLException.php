@@ -3,10 +3,16 @@
 namespace Tjventurini\GraphQLExceptions\Exceptions;
 
 use Exception;
+use GraphQL\Error\ClientAware;
+use GraphQL\Error\ProvidesExtensions;
 use Illuminate\Validation\ValidationException;
-use Nuwave\Lighthouse\Exceptions\RendersErrorsExtensions;
 
-class ClientSaveValidationGraphQLException extends Exception implements RendersErrorsExtensions
+/**
+ * Class ClientSaveValidationGraphQLException
+ *
+ * @package Tjventurini\GraphQLExceptions\Exceptions
+ */
+class ClientSaveValidationGraphQLException extends Exception implements ClientAware, ProvidesExtensions
 {
     /**
     * @var @string
@@ -16,8 +22,7 @@ class ClientSaveValidationGraphQLException extends Exception implements RendersE
     /**
      * Constructor of this exception.
      *
-     * @param Tjventurini\GraphQLExceptions\Exceptions\Throwable $Exception
-     * @return void
+     * @param ValidationException $Exception
      */
     public function __construct(ValidationException $Exception)
     {
@@ -61,7 +66,7 @@ class ClientSaveValidationGraphQLException extends Exception implements RendersE
      *
      * @return array
      */
-    public function extensionsContent(): array
+    public function getExtensions(): array
     {
         return [
             'reason' => $this->reason,
